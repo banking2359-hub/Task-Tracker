@@ -1,15 +1,35 @@
-import { useState } from "react"
+import { use, useEffect, useRef, useState } from "react"
 import { Button, View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
 export default function FocusTime() {
-    const times = [600000, 900000, 1500000]
-    const [coutTime, setTime] = useState(60000)
+    const times = [6000, 900000, 1500000]
+    const [coutTime, setTime] = useState(times[0])
+    const [isStart, setIsStart] = useState(false);
+    const [isZoro, setzero] = useState(false)
+    const IntervalRef = useRef(null)
 
+    const start = () => {
+        if (!isZoro)
+            setIsStart(true)
+    }
+    useEffect(() => {
+        if (isStart) {
+            IntervalRef.current = setInterval(() => {
+                setTime(prev => Math.max(0, prev - 1000))
+            }, 1000)
+        }
+        return () => clearInterval(IntervalRef.current)
+    }, [isStart])
     const formatTime = () => {
         const H = Math.floor(coutTime / (1000 * 60 * 60))
         const M = Math.floor((coutTime / (1000 * 60)) % 60)
         const S = Math.floor((coutTime / 1000) % 60)
         console.log('hello')
+        if (H <= 0 && M <= 0 && S <= 0 && isZoro) {
+            setzero(true)
+            setIsStart(false)
+            return (() => Alert.alert("hello", "'you succesfuly finish your work'"))
+        }
         if (H > 0)
             return `${H}:${M.toString().padStart(2, '0')}:${S.toString().padStart(2, '0')}`;
         else
@@ -23,17 +43,17 @@ export default function FocusTime() {
             <View style={styles.horzontalBar} />
             <View style={styles.timesContainer}>
                 {times.map((time) => (
-                    <TouchableOpacity key={time} style={styles.timeBox}>
+                    <TouchableOpacity onPress={() => { setTime(time); isStart && setIsStart(false) }} key={time} style={styles.timeBox}>
                         <Text style={{ fontSize: 35, padding: 17 }}>{Math.floor(time / (1000 * 60))}</Text>
                     </TouchableOpacity>
                 ))}
             </View>
 
-            <TouchableOpacity style={[styles.startBox, { borderColor: 'blue', marginVertical: 30 }]}>
+            <TouchableOpacity onPress={start} style={[styles.startBox, { borderColor: 'blue', marginVertical: 30 }]}>
                 <Text style={{ fontSize: 30 }}>start</Text>
             </TouchableOpacity>
 
-            <Button title={"Back"} color={'red'} />
+            <Button title={"Back"} color={'red'}  />
         </SafeAreaView>
     )
 }
