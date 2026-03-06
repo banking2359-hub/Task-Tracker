@@ -1,17 +1,17 @@
 import { use, useEffect, useRef, useState } from "react"
 import { Button, View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
-export default function FocusTime() {
+export default function FocusTime({ passedTask, onBack }) {
     const times = [6000, 900000, 1500000]
     const [coutTime, setTime] = useState(times[0])
     const [isStart, setIsStart] = useState(false);
     const [isZoro, setzero] = useState(false)
     const IntervalRef = useRef(null)
-
-    const start = () => {
-        if (!isZoro)
-            setIsStart(true)
+    function startPauseHandler() {
+        if (!isStart) return "start"
+        else return "Pause"
     }
+
     useEffect(() => {
         if (isStart) {
             IntervalRef.current = setInterval(() => {
@@ -24,11 +24,10 @@ export default function FocusTime() {
         const H = Math.floor(coutTime / (1000 * 60 * 60))
         const M = Math.floor((coutTime / (1000 * 60)) % 60)
         const S = Math.floor((coutTime / 1000) % 60)
-        console.log('hello')
         if (H <= 0 && M <= 0 && S <= 0 && isZoro) {
             setzero(true)
             setIsStart(false)
-            return (() => Alert.alert("hello", "'you succesfuly finish your work'"))
+            return (() => Alert.alert("hello", "you succesfuly finish your work"))
         }
         if (H > 0)
             return `${H}:${M.toString().padStart(2, '0')}:${S.toString().padStart(2, '0')}`;
@@ -39,7 +38,7 @@ export default function FocusTime() {
         <SafeAreaView style={{ alignItems: 'center' }}>
 
             <Text style={styles.timer}>{formatTime()}</Text>
-
+            <View style={styles.task}><Text style={{ fontSize: 27 }}>{passedTask}</Text> </View>
             <View style={styles.horzontalBar} />
             <View style={styles.timesContainer}>
                 {times.map((time) => (
@@ -49,11 +48,11 @@ export default function FocusTime() {
                 ))}
             </View>
 
-            <TouchableOpacity onPress={start} style={[styles.startBox, { borderColor: 'blue', marginVertical: 30 }]}>
-                <Text style={{ fontSize: 30 }}>start</Text>
+            <TouchableOpacity onPress={() => setIsStart(!isStart)} style={[styles.startBox, { borderColor: 'blue', marginVertical: 30 }]}>
+                <Text style={{ fontSize: 30 }}>{startPauseHandler()}</Text>
             </TouchableOpacity>
 
-            <Button title={"Back"} color={'red'}  />
+            <Button title={"Back"} color={'red'} onPress={onBack} />
         </SafeAreaView>
     )
 }
@@ -61,7 +60,7 @@ export default function FocusTime() {
 const styles = StyleSheet.create({
 
     timer: {
-        marginVertical: 100,
+        marginVertical: 60,
         fontSize: 80,
     },
     horzontalBar: {
@@ -94,4 +93,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    task: {
+        marginBottom: 30
+    }
 })

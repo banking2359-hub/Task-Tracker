@@ -1,23 +1,31 @@
-import { View, Text, StyleSheet, TextInput } from "react-native"
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useState } from "react";
+import { use, useRef, useState } from "react";
 import FocusTime from './Components/FocusTime'
 const addTask = () => {
-  const [task, setTask] = useState(['hello'])
+  const [task, setTask] = useState([])
   const [inputValue, setInputValue] = useState('')
-
+  const [goToFocus, setGoToFocus] = useState(false)
   const addTasks = () => {
     if (inputValue.trim().length > 0) {
       setTask([...task, inputValue])
-      setInputValue(null)
+      setGoToFocus(true)
     }
 
+
   }
-  
-  return (
-      <FocusTime />
+  const recentTask = (recentTaskValue) => {
+    setGoToFocus(true)
+    setInputValue(recentTaskValue)
+    console.log(recentTaskValue)
+  }
+  if (goToFocus) {
+    return (
+      <FocusTime passedTask={inputValue} onBack={() => { setGoToFocus(false), setInputValue('') }} />
     )
+  }
+
   return (
 
     <SafeAreaView style={styles.container}>
@@ -40,11 +48,13 @@ const addTask = () => {
         <Text style={{ fontSize: 15 }}>Recent Task</Text>
         <View style={[styles.horzontalLine, { backgroundColor: '#a19292', opacity: 0.6 }]} />
       </View >
-      <View style={styles.text}>
-        {task.map((task, index) => (
-          <Text style={{ fontSize: 30 }} key={index}>{task}</Text>
-        ))}
-      </View>
+
+      {task.map((task, index) => (
+        <TouchableOpacity style={styles.text} key={index} onPress={() => recentTask(task)}>
+          <Text style={{ fontSize: 30 }} >{task}</Text>
+        </TouchableOpacity>
+      ))}
+
 
     </SafeAreaView >
   )
