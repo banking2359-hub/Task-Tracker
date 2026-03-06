@@ -15,7 +15,7 @@ export default function FocusTime({ passedTask, onBack }) {
     useEffect(() => {
         if (isStart) {
             IntervalRef.current = setInterval(() => {
-                setTime(prev => Math.max(0, prev - 1000))
+                setTime(prev => prev - 1000)
             }, 1000)
         }
         return () => clearInterval(IntervalRef.current)
@@ -24,16 +24,17 @@ export default function FocusTime({ passedTask, onBack }) {
         const H = Math.floor(coutTime / (1000 * 60 * 60))
         const M = Math.floor((coutTime / (1000 * 60)) % 60)
         const S = Math.floor((coutTime / 1000) % 60)
-        if (H <= 0 && M <= 0 && S <= 0 && isZoro) {
+
+        if (H <= 0 && M <= 0 && S <= 0 && !isZoro) {
             setzero(true)
             setIsStart(false)
-            return (() => Alert.alert("hello", "you succesfuly finish your work"))
         }
         if (H > 0)
             return `${H}:${M.toString().padStart(2, '0')}:${S.toString().padStart(2, '0')}`;
         else
             return `${M.toString().padStart(2, '0')}:${S.toString().padStart(2, '0')}`
     }
+
     return (
         <SafeAreaView style={{ alignItems: 'center' }}>
 
