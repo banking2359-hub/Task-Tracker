@@ -39,22 +39,24 @@ export default function FocusTime({ passedTask, onBack }) {
         <SafeAreaView style={{ alignItems: 'center' }}>
 
             <Text style={styles.timer}>{formatTime()}</Text>
-            <View style={styles.task}><Text style={{ fontSize: 27 }}>{passedTask}</Text> </View>
+            <View style={styles.task}>
+                <Text style={{ fontSize: 27 }}>{passedTask}</Text>
+            </View>
             <View style={styles.horzontalBar} />
             <View style={styles.timesContainer}>
                 {times.map((time) => (
-                    <TouchableOpacity onPress={() => { setTime(time); isStart && setIsStart(false) }} key={time} style={styles.timeBox}>
+                    <TouchableOpacity onPress={() => { setTime(time); setIsStart(false); setzero(false) }} key={time} style={styles.timeBox}>
                         <Text style={{ fontSize: 35, padding: 17 }}>{Math.floor(time / (1000 * 60))}</Text>
                     </TouchableOpacity>
                 ))}
             </View>
 
-            <TouchableOpacity onPress={() => setIsStart(!isStart)} style={[styles.startBox, { borderColor: 'blue', marginVertical: 30 }]}>
+            <TouchableOpacity onPress={() => setIsStart(!isZoro ? !isStart : isStart)} style={[styles.startBox, { borderColor: 'blue', marginVertical: 30 }]}>
                 <Text style={{ fontSize: 30 }}>{startPauseHandler()}</Text>
             </TouchableOpacity>
 
             <Button title={"Back"} color={'red'} onPress={onBack} />
-        </SafeAreaView>
+        </SafeAreaView >
     )
 }
 
