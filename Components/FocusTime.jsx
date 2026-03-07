@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { Button, View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
 export default function FocusTime({ passedTask, onBack }) {
-    const times = [1000, 900000, 1500000]
+    const times = [600000, 900000, 1500000]
     const [coutTime, setTime] = useState(times[0])
     const [resetTime, setResetTime] = useState(coutTime)
     const [isStart, setIsStart] = useState(false);

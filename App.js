@@ -18,7 +18,6 @@ const addTask = () => {
   const recentTask = (recentTaskValue) => {
     setGoToFocus(true)
     setInputValue(recentTaskValue)
-    console.log(recentTaskValue)
   }
   if (goToFocus) {
     return (
