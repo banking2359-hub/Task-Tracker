@@ -95,8 +95,12 @@ const styles = StyleSheet.create({
     borderRadius: 6
   },
   text: {
-    borderWidth: 2,
+    borderWidth: 1,
+    opacity: 0.7,
+    marginTop: 20,
     marginHorizontal: 30,
-
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10
   }
 })

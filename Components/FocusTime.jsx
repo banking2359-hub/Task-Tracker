@@ -1,15 +1,34 @@
-import { use, useEffect, useRef, useState } from "react"
-import { Button, View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { useEffect, useRef, useState } from "react"
+import { Button, View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
 export default function FocusTime({ passedTask, onBack }) {
-    const times = [6000, 900000, 1500000]
+    const times = [1000, 900000, 1500000]
     const [coutTime, setTime] = useState(times[0])
+    const [resetTime, setResetTime] = useState(coutTime)
     const [isStart, setIsStart] = useState(false);
     const [isZoro, setzero] = useState(false)
     const IntervalRef = useRef(null)
     function startPauseHandler() {
         if (!isStart) return "start"
         else return "Pause"
+    }
+
+    const callAlert = () => {
+        Alert.alert(
+            "great job",
+            "you have finished your focus time",
+            [
+                {
+                    text: 'Home',
+                    onPress: () => onBack()
+                },
+                {
+                    text: 'Reset',
+                    onPress: () => { setTime(resetTime); setIsStart(false); setzero(false) }
+                }
+            ],
+            { cancelable: true }
+        )
     }
 
     useEffect(() => {
@@ -28,6 +47,7 @@ export default function FocusTime({ passedTask, onBack }) {
         if (H <= 0 && M <= 0 && S <= 0 && !isZoro) {
             setzero(true)
             setIsStart(false)
+            callAlert()
         }
         if (H > 0)
             return `${H}:${M.toString().padStart(2, '0')}:${S.toString().padStart(2, '0')}`;
@@ -45,7 +65,7 @@ export default function FocusTime({ passedTask, onBack }) {
             <View style={styles.horzontalBar} />
             <View style={styles.timesContainer}>
                 {times.map((time) => (
-                    <TouchableOpacity onPress={() => { setTime(time); setIsStart(false); setzero(false) }} key={time} style={styles.timeBox}>
+                    <TouchableOpacity onPress={() => { setResetTime(time), setTime(time); setIsStart(false); setzero(false) }} key={time} style={styles.timeBox}>
                         <Text style={{ fontSize: 35, padding: 17 }}>{Math.floor(time / (1000 * 60))}</Text>
                     </TouchableOpacity>
                 ))}
