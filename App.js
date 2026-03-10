@@ -12,8 +12,6 @@ const addTask = () => {
       setTask([...task, inputValue])
       setGoToFocus(true)
     }
-
-
   }
   const recentTask = (recentTaskValue) => {
     setGoToFocus(true)
@@ -21,7 +19,7 @@ const addTask = () => {
   }
   if (goToFocus) {
     return (
-      <FocusTime passedTask={inputValue} onBack={() => { setGoToFocus(false), setInputValue('') }} />
+      <FocusTime passedTask={inputValue} onBack={() => { setGoToFocus(false); setInputValue('') }} />
     )
   }
 
@@ -40,7 +38,7 @@ const addTask = () => {
           style={styles.input}
           placeholder="add task"
         />
-        <Ionicons name="add-circle-outline" size={50} color="black" onPress={() => addTasks()} />
+        <Ionicons name="add-circle-outline" size={50} color="black" onPress={addTasks} />
       </View>
       <View style={[styles.TopText, { marginTop: 40 }]}>
         <View style={[styles.horzontalLine, { backgroundColor: '#a19292', opacity: 0.6 }]} />
@@ -53,7 +51,6 @@ const addTask = () => {
           <Text style={{ fontSize: 30 }} >{task}</Text>
         </TouchableOpacity>
       ))}
-
 
     </SafeAreaView >
   )

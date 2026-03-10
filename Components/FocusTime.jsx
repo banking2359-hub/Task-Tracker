@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react"
 import { Button, View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
+import Toast from "react-native-toast-message"
 export default function FocusTime({ passedTask, onBack }) {
-    const times = [600000, 900000, 1500000]
+    const times = [6000, 900000, 1500000]
     const [coutTime, setTime] = useState(times[0])
     const [resetTime, setResetTime] = useState(coutTime)
     const [isStart, setIsStart] = useState(false);
@@ -14,21 +15,14 @@ export default function FocusTime({ passedTask, onBack }) {
     }
 
     const callAlert = () => {
-        Alert.alert(
-            "great job",
-            "you have finished your focus time",
-            [
-                {
-                    text: 'Home',
-                    onPress: () => onBack()
-                },
-                {
-                    text: 'Reset',
-                    onPress: () => { setTime(resetTime); setIsStart(false); setzero(false) }
-                }
-            ],
-            { cancelable: true }
-        )
+
+    }
+    const showToast = () => {
+        Toast.show({
+            type: 'info',
+            text1: 'great job ',
+            text2: 'you have finished your focus time'
+        })
     }
 
     useEffect(() => {
@@ -39,16 +33,18 @@ export default function FocusTime({ passedTask, onBack }) {
         }
         return () => clearInterval(IntervalRef.current)
     }, [isStart])
+
+    useEffect(() => {
+        if (coutTime <= 0 && !isZoro) {
+            setzero(true)
+            setIsStart(false)
+            showToast()
+        }
+    }, [coutTime, isZoro])
     const formatTime = () => {
         const H = Math.floor(coutTime / (1000 * 60 * 60))
         const M = Math.floor((coutTime / (1000 * 60)) % 60)
         const S = Math.floor((coutTime / 1000) % 60)
-
-        if (H <= 0 && M <= 0 && S <= 0 && !isZoro) {
-            setzero(true)
-            setIsStart(false)
-            callAlert()
-        }
         if (H > 0)
             return `${H}:${M.toString().padStart(2, '0')}:${S.toString().padStart(2, '0')}`;
         else
@@ -76,6 +72,7 @@ export default function FocusTime({ passedTask, onBack }) {
             </TouchableOpacity>
 
             <Button title={"Back"} color={'red'} onPress={onBack} />
+            <Toast />
         </SafeAreaView >
     )
 }
