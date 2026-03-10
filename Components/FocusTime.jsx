@@ -15,13 +15,27 @@ export default function FocusTime({ passedTask, onBack }) {
     }
 
     const callAlert = () => {
-
+        Alert.alert(
+            "add another task or restart this task again",
+            null,
+            [
+                {
+                    text: 'Home',
+                    onPress: () => onBack()
+                },
+                {
+                    text: 'Reset',
+                    onPress: () => { setTime(resetTime); setIsStart(false); setzero(false) }
+                }
+            ],
+            { cancelable: true }
+        )
     }
     const showToast = () => {
         Toast.show({
             type: 'info',
             text1: 'great job ',
-            text2: 'you have finished your focus time'
+            text2: 'you have finished your focus time',
         })
     }
 
@@ -39,8 +53,12 @@ export default function FocusTime({ passedTask, onBack }) {
             setzero(true)
             setIsStart(false)
             showToast()
+            setTimeout(() => {
+                callAlert()
+            }, 3000)
         }
-    }, [coutTime, isZoro])
+        console.log('toast message')
+    }, [coutTime])
     const formatTime = () => {
         const H = Math.floor(coutTime / (1000 * 60 * 60))
         const M = Math.floor((coutTime / (1000 * 60)) % 60)
@@ -52,7 +70,7 @@ export default function FocusTime({ passedTask, onBack }) {
     }
 
     return (
-        <SafeAreaView style={{ alignItems: 'center' }}>
+        <SafeAreaView style={{ alignItems: 'center', flex: 1 }}>
 
             <Text style={styles.timer}>{formatTime()}</Text>
             <View style={styles.task}>
