@@ -16,7 +16,7 @@ export default function FocusTime({ passedTask, onBack }) {
 
     const callAlert = () => {
         Alert.alert(
-            "add another task or restart this task again",
+            "add task or restart again",
             null,
             [
                 {
@@ -33,9 +33,10 @@ export default function FocusTime({ passedTask, onBack }) {
     }
     const showToast = () => {
         Toast.show({
-            type: 'info',
+            type: 'success',
             text1: 'great job ',
             text2: 'you have finished your focus time',
+
         })
     }
 
@@ -55,7 +56,7 @@ export default function FocusTime({ passedTask, onBack }) {
             showToast()
             setTimeout(() => {
                 callAlert()
-            }, 3000)
+            }, 4000)
         }
         console.log('toast message')
     }, [coutTime])

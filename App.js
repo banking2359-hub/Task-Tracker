@@ -1,8 +1,9 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { use, useRef, useState } from "react";
+import {useState } from "react";
 import FocusTime from './Components/FocusTime'
+import { SystemBars } from "react-native-edge-to-edge";
 const addTask = () => {
   const [task, setTask] = useState([])
   const [inputValue, setInputValue] = useState('')
@@ -26,6 +27,7 @@ const addTask = () => {
   return (
 
     <SafeAreaView style={styles.container}>
+      <SystemBars style='auto' />
       <View style={styles.TopText}>
         <View style={styles.horzontalLine} />
         <Text style={{ fontSize: 30 }}>Add Task</Text>
