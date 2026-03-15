@@ -60,10 +60,10 @@ export default function FocusTime({ passedTask, onBack }) {
         }
         console.log('toast message')
     }, [coutTime])
-    const formatTime = () => {
-        const H = Math.floor(coutTime / (1000 * 60 * 60))
-        const M = Math.floor((coutTime / (1000 * 60)) % 60)
-        const S = Math.floor((coutTime / 1000) % 60)
+    const formatTime = (times) => {
+        const H = Math.floor(times / (1000 * 60 * 60))
+        const M = Math.floor((times / (1000 * 60)) % 60)
+        const S = Math.floor((times / 1000) % 60)
         if (H > 0)
             return `${H}:${M.toString().padStart(2, '0')}:${S.toString().padStart(2, '0')}`;
         else
@@ -73,7 +73,7 @@ export default function FocusTime({ passedTask, onBack }) {
     return (
         <SafeAreaView style={{ alignItems: 'center', flex: 1 }}>
 
-            <Text style={styles.timer}>{formatTime()}</Text>
+            <Text style={styles.timer}>{formatTime(coutTime)}</Text>
             <View style={styles.task}>
                 <Text style={{ fontSize: 27 }}>{passedTask}</Text>
             </View>
