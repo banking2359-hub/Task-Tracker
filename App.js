@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native"
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import Ionicons from '@expo/vector-icons/Ionicons';
-import {useState } from "react";
+import { useState } from "react";
 import FocusTime from './Components/FocusTime'
 import { SystemBars } from "react-native-edge-to-edge";
 const addTask = () => {
-  const [task, setTask] = useState([])
+  const [task, setTask] = useState(['f', 'f', 'gd', 'f', 'f', 'gd', 'f', 'f', 'gd', 'f', 'f', 'gd', 'f', 'f', 'gd'])
   const [inputValue, setInputValue] = useState('')
   const [goToFocus, setGoToFocus] = useState(false)
   const addTasks = () => {
@@ -47,12 +47,14 @@ const addTask = () => {
         <Text style={{ fontSize: 15 }}>Recent Task</Text>
         <View style={[styles.horzontalLine, { backgroundColor: '#a19292', opacity: 0.6 }]} />
       </View >
+      <ScrollView style={{ height: 300, backgroundColor: '#f0f0f0' }}>
+        {task.map((task, index) => (
+          <TouchableOpacity style={styles.text} key={index} onPress={() => recentTask(task)}>
+            <Text style={{ fontSize: 30 }} >{task}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
 
-      {task.map((task, index) => (
-        <TouchableOpacity style={styles.text} key={index} onPress={() => recentTask(task)}>
-          <Text style={{ fontSize: 30 }} >{task}</Text>
-        </TouchableOpacity>
-      ))}
 
     </SafeAreaView >
   )
