@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from "react-native"
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Image, ImageBackground } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from "react";
 import FocusTime from './Components/FocusTime'
 import { SystemBars } from "react-native-edge-to-edge";
+
+const img = require('./assets/background.jpeg')
 const addTask = () => {
   const [task, setTask] = useState(['f', 'f', 'gd', 'f', 'f', 'gd', 'f', 'f', 'gd', 'f', 'f', 'gd', 'f', 'f', 'gd'])
   const [inputValue, setInputValue] = useState('')
@@ -47,13 +49,18 @@ const addTask = () => {
         <Text style={{ fontSize: 15 }}>Recent Task</Text>
         <View style={[styles.horzontalLine, { backgroundColor: '#a19292', opacity: 0.6 }]} />
       </View >
-      <ScrollView style={{ height: 300, backgroundColor: '#f0f0f0' }}>
-        {task.map((task, index) => (
-          <TouchableOpacity style={styles.text} key={index} onPress={() => recentTask(task)}>
-            <Text style={{ fontSize: 30 }} >{task}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+      <ImageBackground style={{ flex: 1 }} source={img}>
+        <ScrollView style={{ height: 300 }}
+          contentContainerStyle={{ paddingBottom: 50 }}
+        >
+          {task.map((task, index) => (
+            <TouchableOpacity style={styles.text} key={index} onPress={() => recentTask(task)}>
+              <Text style={{ fontSize: 30 ,color:'white'}} >{task}</Text>
+            </TouchableOpacity>
+          ))}
+
+        </ScrollView>
+      </ImageBackground>
 
 
     </SafeAreaView >
@@ -95,6 +102,7 @@ const styles = StyleSheet.create({
     borderRadius: 6
   },
   text: {
+    borderColor: 'white',
     borderWidth: 1,
     opacity: 0.7,
     marginTop: 20,
