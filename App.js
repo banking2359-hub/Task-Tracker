@@ -7,12 +7,13 @@ import { SystemBars } from "react-native-edge-to-edge";
 
 const img = require('./assets/background.jpeg')
 const addTask = () => {
-  const [task, setTask] = useState(['f', 'f', 'gd', 'f', 'f', 'gd', 'f', 'f', 'gd', 'f', 'f', 'gd', 'f', 'f', 'gd'])
+  const [task, setTask] = useState([])
   const [inputValue, setInputValue] = useState('')
   const [goToFocus, setGoToFocus] = useState(false)
   const addTasks = () => {
-    if (inputValue.trim().length > 0) {
-      setTask([...task, inputValue])
+    const trimedValue = inputValue.trim()
+    if (trimedValue.length > 0) {
+      setTask([trimedValue, ...task])
       setGoToFocus(true)
     }
   }
@@ -55,7 +56,7 @@ const addTask = () => {
         >
           {task.map((task, index) => (
             <TouchableOpacity style={styles.text} key={index} onPress={() => recentTask(task)}>
-              <Text style={{ fontSize: 30 ,color:'white'}} >{task}</Text>
+              <Text style={{ fontSize: 30, color: 'white' }} >{task}</Text>
             </TouchableOpacity>
           ))}
 
