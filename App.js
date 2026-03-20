@@ -49,8 +49,8 @@ const addTask = () => {
         <Text style={{ fontSize: 15 }}>Recent Task</Text>
         <View style={[styles.horzontalLine, { backgroundColor: '#a19292', opacity: 0.6 }]} />
       </View >
-      <ImageBackground style={{ flex: .7, margin: 30, padding: 10, borderRadius: 30, overflow: 'hidden', resizeMode: 'cover' }} source={require('./assets/background.jpeg')}>
-        <ScrollView 
+      <ImageBackground resizeMode="cover" style={{ flex: 1, margin: 20, padding: 10, borderRadius: 30, overflow: 'hidden' }} source={require('./assets/background.jpeg')}>
+        <ScrollView
           contentContainerStyle={{ paddingBottom: 50 }}
         >
           {task.map((task, index) => (

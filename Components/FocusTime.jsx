@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { Button, View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native"
+import { Button, View, Text, StyleSheet, TouchableOpacity, ImageBackground, Alert } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast from "react-native-toast-message"
 import { Ionicons } from "@expo/vector-icons"
@@ -59,7 +59,7 @@ export default function FocusTime({ passedTask, onBack }) {
                 callAlert()
             }, 4000)
         }
-        
+
     }, [coutTime])
     const formatTime = (times) => {
         const H = Math.floor(times / (1000 * 60 * 60))
@@ -72,31 +72,34 @@ export default function FocusTime({ passedTask, onBack }) {
     }
 
     return (
-        <SafeAreaView style={{ alignItems: 'center', flex: 1 }}>
-            <TouchableOpacity style={styles.backBottom} onPress={onBack}>
-                <Ionicons name="chevron-back" size={30} color={'black'} />
-                <Text style={{ fontSize: 30 }}>Back</Text>
-            </TouchableOpacity>
+        <SafeAreaView style={{ flex: 1 }}>
+            <ImageBackground source={require('../assets/background.jpeg')} resizeMode='cover' style={{ flex: 1, alignItems: 'center' }} >
+                <TouchableOpacity style={styles.backBottom} onPress={onBack}>
+                    <Ionicons name="chevron-back" size={30} color={'white'} />
+                    <Text style={{ fontSize: 30, color: 'white' }}>Back</Text>
+                </TouchableOpacity>
 
-            <Text style={styles.timer}>{formatTime(coutTime)}</Text>
-            <View style={styles.task}>
-                <Text style={{ fontSize: 27 }}>{passedTask}</Text>
-            </View>
-            <View style={styles.horzontalBar} />
-            <View style={styles.timesContainer}>
-                {times.map((time) => (
-                    <TouchableOpacity onPress={() => { setResetTime(time), setTime(time); setIsStart(false); setzero(false) }} key={time} style={styles.timeBox}>
-                        <Text style={{ fontSize: 35, padding: 17 }}>{Math.floor(time / (1000 * 60))}</Text>
-                    </TouchableOpacity>
-                ))}
-            </View>
+                <Text style={styles.timer}>{formatTime(coutTime)}</Text>
+                <View style={styles.task}>
+                    <Text style={{ fontSize: 27, color: 'white' }}>{passedTask}</Text>
+                </View>
+                <View style={styles.horzontalBar} />
+                <View style={styles.timesContainer}>
+                    {times.map((time) => (
+                        <TouchableOpacity onPress={() => { setResetTime(time), setTime(time); setIsStart(false); setzero(false) }} key={time} style={styles.timeBox}>
+                            <Text style={{ fontSize: 35, padding: 17 }}>{Math.floor(time / (1000 * 60))}</Text>
+                        </TouchableOpacity>
+                    ))}
+                </View>
 
-            <TouchableOpacity onPress={() => setIsStart(!isZoro ? !isStart : isStart)} style={[styles.startBox, { borderColor: 'blue', marginVertical: 30 }]}>
-                <Text style={{ fontSize: 30 }}>{startPauseHandler()}</Text>
-            </TouchableOpacity>
+                <TouchableOpacity onPress={() => setIsStart(!isZoro ? !isStart : isStart)} style={[styles.startBox, { borderColor: 'blue', marginVertical: 30 }]}>
+                    <Text style={{ fontSize: 30, color: 'white' }}>{startPauseHandler()}</Text>
+                </TouchableOpacity>
 
 
-            <Toast />
+                <Toast />
+            </ImageBackground>
+
         </SafeAreaView >
     )
 }
@@ -106,9 +109,10 @@ const styles = StyleSheet.create({
     timer: {
         marginVertical: 60,
         fontSize: 80,
+        color: 'white'
     },
     horzontalBar: {
-        backgroundColor: 'red',
+        backgroundColor: 'white',
         borderWidth: 1,
         width: '100%',
         marginBottom: 40,
@@ -118,24 +122,28 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        marginBottom: 30
+        marginBottom: 30,
+        borderColor: 'white'
     },
     timeBox: {
         padding: 15,
         borderWidth: 1,
-        borderColor: 'red',
+        borderColor: 'white',
+        backgroundColor: '#b3a6c0',
         borderRadius: 100,
         justifyContent: 'center',
         alignItems: 'center',
+        opacity: .8
     },
     startBox: {
-        borderColor: '#77ff00',
+        backgroundColor: '#67d45d',
         borderWidth: 2,
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 10,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        opacity: .7
     },
     task: {
         marginBottom: 30
@@ -143,7 +151,7 @@ const styles = StyleSheet.create({
     backBottom: {
         flexDirection: 'row',
         alignItems: 'center',
-        alignSelf: 'flex-Start',
+        alignSelf: 'flex-start',
         padding: 30,
         gap: 3,
     }
