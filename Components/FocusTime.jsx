@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { Button, View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast from "react-native-toast-message"
+import { Ionicons } from "@expo/vector-icons"
 export default function FocusTime({ passedTask, onBack }) {
     const times = [6000, 900000, 1500000]
     const [coutTime, setTime] = useState(times[0])
@@ -58,7 +59,7 @@ export default function FocusTime({ passedTask, onBack }) {
                 callAlert()
             }, 4000)
         }
-        console.log('toast message')
+        
     }, [coutTime])
     const formatTime = (times) => {
         const H = Math.floor(times / (1000 * 60 * 60))
@@ -72,6 +73,10 @@ export default function FocusTime({ passedTask, onBack }) {
 
     return (
         <SafeAreaView style={{ alignItems: 'center', flex: 1 }}>
+            <TouchableOpacity style={styles.backBottom} onPress={onBack}>
+                <Ionicons name="chevron-back" size={30} color={'black'} />
+                <Text style={{ fontSize: 30 }}>Back</Text>
+            </TouchableOpacity>
 
             <Text style={styles.timer}>{formatTime(coutTime)}</Text>
             <View style={styles.task}>
@@ -90,7 +95,7 @@ export default function FocusTime({ passedTask, onBack }) {
                 <Text style={{ fontSize: 30 }}>{startPauseHandler()}</Text>
             </TouchableOpacity>
 
-            <Button title={"Back"} color={'red'} onPress={onBack} />
+
             <Toast />
         </SafeAreaView >
     )
@@ -134,5 +139,12 @@ const styles = StyleSheet.create({
     },
     task: {
         marginBottom: 30
+    },
+    backBottom: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        alignSelf: 'flex-Start',
+        padding: 30,
+        gap: 3,
     }
 })

@@ -5,7 +5,6 @@ import { useState } from "react";
 import FocusTime from './Components/FocusTime'
 import { SystemBars } from "react-native-edge-to-edge";
 
-const img = require('./assets/background.jpeg')
 const addTask = () => {
   const [task, setTask] = useState([])
   const [inputValue, setInputValue] = useState('')
@@ -30,7 +29,7 @@ const addTask = () => {
   return (
 
     <SafeAreaView style={styles.container}>
-      <SystemBars style='auto' />
+      <SystemBars style='light' />
       <View style={styles.TopText}>
         <View style={styles.horzontalLine} />
         <Text style={{ fontSize: 30 }}>Add Task</Text>
@@ -50,8 +49,8 @@ const addTask = () => {
         <Text style={{ fontSize: 15 }}>Recent Task</Text>
         <View style={[styles.horzontalLine, { backgroundColor: '#a19292', opacity: 0.6 }]} />
       </View >
-      <ImageBackground style={{ flex: 1 }} source={img}>
-        <ScrollView style={{ height: 300 }}
+      <ImageBackground style={{ flex: .7, margin: 30, padding: 10, borderRadius: 30, overflow: 'hidden', resizeMode: 'cover' }} source={require('./assets/background.jpeg')}>
+        <ScrollView 
           contentContainerStyle={{ paddingBottom: 50 }}
         >
           {task.map((task, index) => (
