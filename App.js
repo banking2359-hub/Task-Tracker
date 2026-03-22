@@ -22,9 +22,9 @@ const addTask = () => {
   ]
   const recentTimeRenderItem = ({ item }) => {
     return (
-      <View style={{ backgroundColor: 'red' }} >
-        <Text>{item.recentTime}</Text>
-      </View>
+      <TouchableOpacity style={{marginHorizontal:30}} >
+        <Text style={{fontSize:20}}>{item.recentTime}</Text>
+      </TouchableOpacity>
     )
   }
   const addTasks = () => {
@@ -72,6 +72,7 @@ const addTask = () => {
         keyExtractor={(item) => item.id}
         renderItem={recentTimeRenderItem}
         horizontal={true}
+        style={{flexGrow: 0,paddingVertical:20 }}
       />
       <ImageBackground resizeMode="cover" style={{ flex: 1, margin: 20, padding: 10, borderRadius: 30, overflow: 'hidden' }} source={require('./assets/background.jpeg')}>
         <ScrollView
