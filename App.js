@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Image, ImageBackground } from "react-native"
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Image, ImageBackground, FlatList } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from "react";
@@ -6,9 +6,27 @@ import FocusTime from './Components/FocusTime'
 import { SystemBars } from "react-native-edge-to-edge";
 
 const addTask = () => {
-  const [task, setTask] = useState([])
+  const [task, setTask] = useState(['d', 'f', 'sf', 'sd', 'd', 'f', 'sf', 'sd'])
   const [inputValue, setInputValue] = useState('')
   const [goToFocus, setGoToFocus] = useState(false)
+  const recentTime = [
+    { id: '1', recentTime: 'today' },
+    { id: '2', recentTime: 'yesterday' },
+    { id: '3', recentTime: '2 day before' },
+    { id: '4', recentTime: 'today' },
+    { id: '5', recentTime: 'yesterday' },
+    { id: '6', recentTime: '2 day before' },
+    { id: '7', recentTime: 'today' },
+    { id: '8', recentTime: 'yesterday' },
+    { id: '9', recentTime: '2 day before' },
+  ]
+  const recentTimeRenderItem = ({ item }) => {
+    return (
+      <View style={{ backgroundColor: 'red' }} >
+        <Text>{item.recentTime}</Text>
+      </View>
+    )
+  }
   const addTasks = () => {
     const trimedValue = inputValue.trim()
     if (trimedValue.length > 0) {
@@ -49,6 +67,12 @@ const addTask = () => {
         <Text style={{ fontSize: 15 }}>Recent Task</Text>
         <View style={[styles.horzontalLine, { backgroundColor: '#a19292', opacity: 0.6 }]} />
       </View >
+      <FlatList
+        data={recentTime}
+        keyExtractor={(item) => item.id}
+        renderItem={recentTimeRenderItem}
+        horizontal={true}
+      />
       <ImageBackground resizeMode="cover" style={{ flex: 1, margin: 20, padding: 10, borderRadius: 30, overflow: 'hidden' }} source={require('./assets/background.jpeg')}>
         <ScrollView
           contentContainerStyle={{ paddingBottom: 50 }}
