@@ -22,8 +22,8 @@ const addTask = () => {
   ]
   const recentTimeRenderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={{marginHorizontal:30}} >
-        <Text style={{fontSize:20}}>{item.recentTime}</Text>
+      <TouchableOpacity style={[styles.timeRecent]} >
+        <Text style={{ fontSize: 17 }}>{item.recentTime}</Text>
       </TouchableOpacity>
     )
   }
@@ -72,7 +72,7 @@ const addTask = () => {
         keyExtractor={(item) => item.id}
         renderItem={recentTimeRenderItem}
         horizontal={true}
-        style={{flexGrow: 0,paddingVertical:20 }}
+        style={{ flexGrow: 0, paddingVertical: 20 }}
       />
       <ImageBackground resizeMode="cover" style={{ flex: 1, margin: 20, padding: 10, borderRadius: 30, overflow: 'hidden' }} source={require('./assets/background.jpeg')}>
         <ScrollView
@@ -135,5 +135,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 20,
     paddingVertical: 10
+  },
+  timeRecent: {
+    backgroundColor: '#ececec',
+    paddingVertical: 7,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginHorizontal: 15,
+    borderColor: '#e7d4d2',
+    borderWidth: 1,
   }
 })
