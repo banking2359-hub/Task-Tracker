@@ -22,9 +22,10 @@ const addTask = () => {
   ]
   const selectedDayList = recentTime.find((item) => item.id == selectedDay)
   const recentTimeRenderItem = ({ item }) => {
+    const isActive = item.id == selectedDay
     return (
-      <TouchableOpacity onPress={() => setselectedDay(item.id)} style={[styles.timeRecent]} >
-        <Text style={{ fontSize: 17 }}>{item.recentTime}</Text>
+      <TouchableOpacity onPress={() => setselectedDay(item.id)} style={[styles.timeRecent, { backgroundColor: isActive ? '#88ced2' : 'transparent' }]} >
+        <Text style={{ fontSize: 17, color: isActive ? 'white' : 'black' }}>{item.recentTime}</Text>
       </TouchableOpacity>
     )
   }
@@ -138,7 +139,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10
   },
   timeRecent: {
-    backgroundColor: '#ececec',
     paddingVertical: 7,
     paddingHorizontal: 20,
     borderRadius: 10,
