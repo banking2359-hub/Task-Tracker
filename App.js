@@ -6,23 +6,24 @@ import FocusTime from './Components/FocusTime'
 import { SystemBars } from "react-native-edge-to-edge";
 
 const addTask = () => {
-  const [task, setTask] = useState(['d', 'f', 'sf', 'sd', 'd', 'f', 'sf', 'sd'])
+  const [todayTask, setTodayTask] = useState(['d', 'f', 'sf', 'sd', 'd', 'f', 'sf', 'sd'])
+  const [yesterdayTask, setYesterdayTask] = useState(['d', 'f',])
+  const [dayBeforeTask, setDayBefforeTask] = useState(['d', 'f',])
+  const [selectedDay, setselectedDay] = useState(1)
   const [inputValue, setInputValue] = useState('')
   const [goToFocus, setGoToFocus] = useState(false)
   const recentTime = [
-    { id: '1', recentTime: 'today' },
-    { id: '2', recentTime: 'yesterday' },
-    { id: '3', recentTime: '2 day before' },
-    { id: '4', recentTime: 'today' },
-    { id: '5', recentTime: 'yesterday' },
-    { id: '6', recentTime: '2 day before' },
-    { id: '7', recentTime: 'today' },
-    { id: '8', recentTime: 'yesterday' },
-    { id: '9', recentTime: '2 day before' },
+    { id: '1', recentTime: 'today', taskList: [...todayTask] },
+    { id: '2', recentTime: 'yesterday', taskList: [...yesterdayTask] },
+    { id: '3', recentTime: '2 day before', taskList: [...dayBeforeTask] },
+    { id: '4', recentTime: 'a week before', taskList: [...todayTask] },
+    { id: '5', recentTime: 'a month before', taskList: [...todayTask] },
+    { id: '6', recentTime: 'a long time ago ', taskList: [...todayTask] },
   ]
+  const selectedDayList = recentTime.find((item) => item.id == selectedDay)
   const recentTimeRenderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={[styles.timeRecent]} >
+      <TouchableOpacity onPress={() => setselectedDay(item.id)} style={[styles.timeRecent]} >
         <Text style={{ fontSize: 17 }}>{item.recentTime}</Text>
       </TouchableOpacity>
     )
@@ -78,7 +79,7 @@ const addTask = () => {
         <ScrollView
           contentContainerStyle={{ paddingBottom: 50 }}
         >
-          {task.map((task, index) => (
+          {selectedDayList.taskList.map((task, index) => (
             <TouchableOpacity style={styles.text} key={index} onPress={() => recentTask(task)}>
               <Text style={{ fontSize: 30, color: 'white' }} >{task}</Text>
             </TouchableOpacity>
