@@ -5,6 +5,7 @@ import { useState } from "react";
 import FocusTime from './Components/FocusTime'
 import { SystemBars } from "react-native-edge-to-edge";
 
+
 const addTask = () => {
   const [todayTask, setTodayTask] = useState(['d', 'f', 'sf', 'sd', 'd', 'f', 'sf', 'sd'])
   const [yesterdayTask, setYesterdayTask] = useState(['d', 'f',])
@@ -32,7 +33,7 @@ const addTask = () => {
   const addTasks = () => {
     const trimedValue = inputValue.trim()
     if (trimedValue.length > 0) {
-      setTask([trimedValue, ...task])
+      setTodayTask([trimedValue, ...todayTask])
       setGoToFocus(true)
     }
   }
