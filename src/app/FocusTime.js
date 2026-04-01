@@ -3,7 +3,7 @@ import { Button, View, Text, StyleSheet, TouchableOpacity, ImageBackground, Aler
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast from "react-native-toast-message"
 import { Ionicons } from "@expo/vector-icons"
-export default function FocusTime({ passedTask, onBack }) {
+export default function FocusTime() {
     const times = [6000, 900000, 1500000]
     const [coutTime, setTime] = useState(times[0])
     const [resetTime, setResetTime] = useState(coutTime)
@@ -22,7 +22,7 @@ export default function FocusTime({ passedTask, onBack }) {
             [
                 {
                     text: 'Home',
-                    onPress: () => onBack()
+
                 },
                 {
                     text: 'Reset',
@@ -73,15 +73,15 @@ export default function FocusTime({ passedTask, onBack }) {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ImageBackground source={require('../assets/background.jpeg')} resizeMode='cover' style={{ flex: 1, alignItems: 'center' }} >
-                <TouchableOpacity style={styles.backBottom} onPress={onBack}>
+            <ImageBackground source={require('../../assets/background.jpeg')} resizeMode='cover' style={{ flex: 1, alignItems: 'center' }} >
+                <TouchableOpacity style={styles.backBottom}>
                     <Ionicons name="chevron-back" size={30} color={'white'} />
                     <Text style={{ fontSize: 30, color: 'white' }}>Back</Text>
                 </TouchableOpacity>
 
                 <Text style={styles.timer}>{formatTime(coutTime)}</Text>
                 <View style={styles.task}>
-                    <Text style={{ fontSize: 27, color: 'white' }}>{passedTask}</Text>
+                    <Text style={{ fontSize: 27, color: 'white' }}>task</Text>
                 </View>
                 <View style={styles.horzontalBar} />
                 <View style={styles.timesContainer}>
