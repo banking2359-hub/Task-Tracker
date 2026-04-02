@@ -24,7 +24,7 @@ export default function FocusTime() {
             [
                 {
                     text: 'Home',
-
+                    onPress: () => router.push({ pathname: '/' })
                 },
                 {
                     text: 'Reset',

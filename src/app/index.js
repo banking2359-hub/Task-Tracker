@@ -6,9 +6,9 @@ import { SystemBars } from "react-native-edge-to-edge";
 import { router } from 'expo-router'
 
 const addTask = () => {
-    const [todayTask, setTodayTask] = useState(['coding', 'f', 'sf', 'sd', 'd', 'f', 'sf', 'sd'])
-    const [yesterdayTask, setYesterdayTask] = useState(['d', 'f',])
-    const [dayBeforeTask, setDayBefforeTask] = useState(['d', 'f',])
+    const [todayTask, setTodayTask] = useState([])
+    const [yesterdayTask, setYesterdayTask] = useState([])
+    const [dayBeforeTask, setDayBefforeTask] = useState([])
     const [selectedDay, setselectedDay] = useState(1)
     const [inputValue, setInputValue] = useState('')
     const recentTime = [
@@ -33,11 +33,12 @@ const addTask = () => {
         if (trimedValue.length > 0) {
             setTodayTask([trimedValue, ...todayTask])
             setselectedDay(1)
-            router.push({ pathname: '/FocusTime', params: { addTask: trimedValue } })
+            // router.push({ pathname: '/FocusTime', params: { addTask: trimedValue } })
         }
+        setInputValue('')
     }
     const recentTask = (recentTaskValue) => {
-        // setGoToFocus(true)
+        router.push({ pathname: '/FocusTime', params: { addTask: recentTaskValue } })
         setInputValue(recentTaskValue)
     }
     return (
