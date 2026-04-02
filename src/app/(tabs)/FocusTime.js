@@ -3,7 +3,7 @@ import { Button, View, Text, StyleSheet, TouchableOpacity, ImageBackground, Aler
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast from "react-native-toast-message"
 import { Ionicons } from "@expo/vector-icons"
-import { router, useLocalSearchParams } from "expo-router"
+import { Link, router, useLocalSearchParams } from "expo-router"
 export default function FocusTime() {
     const times = [6000, 900000, 1500000]
     const [coutTime, setTime] = useState(times[0])
@@ -24,7 +24,7 @@ export default function FocusTime() {
             [
                 {
                     text: 'Home',
-                    onPress: () => router.push({ pathname: '/' })
+                    onPress: () => router.push({ pathname: '/index' })
                 },
                 {
                     text: 'Reset',
@@ -75,8 +75,8 @@ export default function FocusTime() {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ImageBackground source={require('../../assets/background.jpeg')} resizeMode='cover' style={{ flex: 1, alignItems: 'center' }} >
-                <TouchableOpacity style={styles.backBottom} onPress={() => router.push({ pathname: '/' })}>
+            <ImageBackground source={require('../../../assets/background.jpeg')} resizeMode='cover' style={{ flex: 1, alignItems: 'center' }} >
+                <TouchableOpacity style={styles.backBottom} onPress={() => router.push({ pathname: '/index' })}>
                     <Ionicons name="chevron-back" size={30} color={'white'} />
                     <Text style={{ fontSize: 30, color: 'white' }}>Back</Text>
                 </TouchableOpacity>
@@ -97,8 +97,6 @@ export default function FocusTime() {
                 <TouchableOpacity onPress={() => setIsStart(!isZoro ? !isStart : isStart)} style={[styles.startBox, { borderColor: 'blue', marginVertical: 30 }]}>
                     <Text style={{ fontSize: 30, color: 'white' }}>{startPauseHandler()}</Text>
                 </TouchableOpacity>
-
-
                 <Toast />
             </ImageBackground>
 

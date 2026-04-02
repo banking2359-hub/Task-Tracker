@@ -3,9 +3,10 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from "react";
 import { SystemBars } from "react-native-edge-to-edge";
-import { router } from 'expo-router'
+import { router, useLocalSearchParams } from 'expo-router'
 
 const addTask = () => {
+    const param = useLocalSearchParams()
     const [todayTask, setTodayTask] = useState([])
     const [yesterdayTask, setYesterdayTask] = useState([])
     const [dayBeforeTask, setDayBefforeTask] = useState([])
@@ -33,7 +34,7 @@ const addTask = () => {
         if (trimedValue.length > 0) {
             setTodayTask([trimedValue, ...todayTask])
             setselectedDay(1)
-            // router.push({ pathname: '/FocusTime', params: { addTask: trimedValue } })
+            router.push({ pathname: '/FocusTime', params: { addTask: trimedValue } })
         }
         setInputValue('')
     }
@@ -71,7 +72,7 @@ const addTask = () => {
                 horizontal={true}
                 style={{ flexGrow: 0, paddingVertical: 20 }}
             />
-            <ImageBackground resizeMode="cover" style={{ flex: 1, margin: 20, padding: 10, borderRadius: 30, overflow: 'hidden' }} source={require('../../assets/background.jpeg')}>
+            <ImageBackground resizeMode="cover" style={{ flex: 1, margin: 20, padding: 10, borderRadius: 30, overflow: 'hidden' }} source={require('../../../assets/background.jpeg')}>
                 <ScrollView
                     contentContainerStyle={{ paddingBottom: 50 }}
                 >
