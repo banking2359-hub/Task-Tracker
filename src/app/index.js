@@ -3,15 +3,14 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from "react";
 import { SystemBars } from "react-native-edge-to-edge";
-
+import { router } from 'expo-router'
 
 const addTask = () => {
-    const [todayTask, setTodayTask] = useState(['d', 'f', 'sf', 'sd', 'd', 'f', 'sf', 'sd'])
+    const [todayTask, setTodayTask] = useState(['coding', 'f', 'sf', 'sd', 'd', 'f', 'sf', 'sd'])
     const [yesterdayTask, setYesterdayTask] = useState(['d', 'f',])
     const [dayBeforeTask, setDayBefforeTask] = useState(['d', 'f',])
     const [selectedDay, setselectedDay] = useState(1)
     const [inputValue, setInputValue] = useState('')
-    const [goToFocus, setGoToFocus] = useState(false)
     const recentTime = [
         { id: '1', recentTime: 'today', taskList: [...todayTask] },
         { id: '2', recentTime: 'yesterday', taskList: [...yesterdayTask] },
@@ -33,20 +32,14 @@ const addTask = () => {
         const trimedValue = inputValue.trim()
         if (trimedValue.length > 0) {
             setTodayTask([trimedValue, ...todayTask])
-            setGoToFocus(true)
             setselectedDay(1)
+            router.push({ pathname: '/FocusTime', params: { addTask: trimedValue } })
         }
     }
     const recentTask = (recentTaskValue) => {
-        setGoToFocus(true)
+        // setGoToFocus(true)
         setInputValue(recentTaskValue)
     }
-    // if (goToFocus) {
-    //     return (
-    //         <FocusTime passedTask={inputValue} onBack={() => { setGoToFocus(false); setInputValue('') }} />
-    //     )
-    // }
-
     return (
 
         <SafeAreaView style={styles.container}>
