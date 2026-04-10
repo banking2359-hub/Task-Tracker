@@ -1,17 +1,12 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Image, ImageBackground, FlatList } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { SystemBars } from "react-native-edge-to-edge";
-import { router, useLocalSearchParams } from 'expo-router'
-
+import { router } from 'expo-router'
+import { TaskContext } from "../../context/allState";
 const addTask = () => {
-    const param = useLocalSearchParams()
-    const [todayTask, setTodayTask] = useState([])
-    const [yesterdayTask, setYesterdayTask] = useState([])
-    const [dayBeforeTask, setDayBefforeTask] = useState([])
-    const [selectedDay, setselectedDay] = useState(1)
-    const [inputValue, setInputValue] = useState('')
+    const { setInputValue, inputValue, setselectedDayId, selectedDayId, selectedDay, setselectedDay, setDayBefforeTask, dayBeforeTask, setYesterdayTask, yesterdayTask, setTodayTask, todayTask } = useContext(TaskContext);
     const recentTime = [
         { id: '1', recentTime: 'today', taskList: [...todayTask] },
         { id: '2', recentTime: 'yesterday', taskList: [...yesterdayTask] },
@@ -20,11 +15,11 @@ const addTask = () => {
         { id: '5', recentTime: 'a month before', taskList: [...todayTask] },
         { id: '6', recentTime: 'a long time ago ', taskList: [...todayTask] },
     ]
-    const selectedDayList = recentTime.find((item) => item.id == selectedDay)
+    const selectedDayList = recentTime.find((item) => item.id == selectedDayId)
     const recentTimeRenderItem = ({ item }) => {
-        const isActive = item.id == selectedDay
+        const isActive = item.id == selectedDayId
         return (
-            <TouchableOpacity onPress={() => setselectedDay(item.id)} style={[styles.timeRecent, { backgroundColor: isActive ? '#88ced2' : 'transparent' }]} >
+            <TouchableOpacity onPress={() => setselectedDayId(item.id)} style={[styles.timeRecent, { backgroundColor: isActive ? '#88ced2' : 'transparent' }]} >
                 <Text style={{ fontSize: 17, color: isActive ? 'white' : 'black' }}>{item.recentTime}</Text>
             </TouchableOpacity>
         )
@@ -32,20 +27,20 @@ const addTask = () => {
     const addTasks = () => {
         const trimedValue = inputValue.trim()
         if (trimedValue.length > 0) {
-            setTodayTask([trimedValue, ...todayTask])
-            setselectedDay(1)
-            router.push({ pathname: '/FocusTime', params: { addTask: trimedValue } })
+            setselectedDay(trimedValue)
+            router.push({ pathname: '/FocusTime' })
         }
         setInputValue('')
     }
     const recentTask = (recentTaskValue) => {
-        router.push({ pathname: '/FocusTime', params: { addTask: recentTaskValue } })
+        setselectedDay(recentTaskValue)
+        router.push({ pathname: '/FocusTime' })
         setInputValue(recentTaskValue)
     }
     return (
 
         <SafeAreaView style={styles.container}>
-            <SystemBars style='light' />
+            <SystemBars style='auto' />
             <View style={styles.TopText}>
                 <View style={styles.horzontalLine} />
                 <Text style={{ fontSize: 30 }}>Add Task</Text>
