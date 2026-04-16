@@ -1,25 +1,30 @@
 import { Tabs } from "expo-router";
-
-import TaskProvider from "../../context/allState";
+import ColorProvider from "../../context/colorContext";
+import TaskProvider from "../../context/TaskContext";
 export default function layout() {
     return (
-        <TaskProvider>
-            <Tabs>
-                <Tabs.Screen
-                    name="index"
-                    options={{
-                        title: 'Home',
+        <ColorProvider>
+            <TaskProvider>
+                <Tabs screenOptions={
+                    {
                         headerShown: false
-                    }}
-                />
-                <Tabs.Screen
-                    name="FocusTime"
-                    options={{
-                        title: 'Focus',
-                    }}
-                />
-            </Tabs>
-        </TaskProvider>
+                    }
+                }>
+                    <Tabs.Screen
+                        name="index"
+                        options={{
+                            title: 'Home',
+                        }}
+                    />
+                    <Tabs.Screen
+                        name="FocusTime"
+                        options={{
+                            title: 'Focus',
+                        }}
+                    />
+                </Tabs>
+            </TaskProvider>
+        </ColorProvider>
 
     )
 }

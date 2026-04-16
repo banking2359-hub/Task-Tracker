@@ -4,7 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast from "react-native-toast-message"
 import { Ionicons } from "@expo/vector-icons"
 import { Link, router } from "expo-router"
-import { TaskContext } from "../../context/allState"
+import { TaskContext } from "../../context/TaskContext"
+import { SystemBars } from "react-native-edge-to-edge"
 export default function FocusTime() {
     const { selectedDay, setTodayTask, setselectedDayId, todayTask } = useContext(TaskContext)
     const times = [6000, 900000, 1500000]
@@ -77,8 +78,10 @@ export default function FocusTime() {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <ImageBackground source={require('../../../assets/background.jpeg')} resizeMode='cover' style={{ flex: 1, alignItems: 'center' }} >
+        <ImageBackground source={require('../../../assets/background.jpeg')} resizeMode='cover' style={{ flex: 1 }} >
+            <SystemBars style={'light'} />
+            <SafeAreaView style={{ flex: 1, alignItems: 'center' }}>
+
                 <TouchableOpacity style={styles.backBottom} onPress={() => router.back()}>
                     <Ionicons name="chevron-back" size={30} color={'white'} />
                     <Text style={{ fontSize: 30, color: 'white' }}>Back</Text>
@@ -101,9 +104,10 @@ export default function FocusTime() {
                     <Text style={{ fontSize: 30, color: 'white' }}>{startPauseHandler()}</Text>
                 </TouchableOpacity>
                 <Toast />
-            </ImageBackground>
 
-        </SafeAreaView >
+
+            </SafeAreaView >
+        </ImageBackground>
     )
 }
 

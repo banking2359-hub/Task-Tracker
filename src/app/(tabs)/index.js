@@ -4,9 +4,11 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState, useContext } from "react";
 import { SystemBars } from "react-native-edge-to-edge";
 import { router } from 'expo-router'
-import { TaskContext } from "../../context/allState";
+import { TaskContext } from "../../context/TaskContext";
+import { useColorContext } from "../../context/colorContext";
 const addTask = () => {
     const { setInputValue, inputValue, setselectedDayId, selectedDayId, selectedDay, setselectedDay, setDayBefforeTask, dayBeforeTask, setYesterdayTask, yesterdayTask, setTodayTask, todayTask } = useContext(TaskContext);
+    const { color } = useColorContext()
     const recentTime = [
         { id: '1', recentTime: 'today', taskList: [...todayTask] },
         { id: '2', recentTime: 'yesterday', taskList: [...yesterdayTask] },
@@ -19,8 +21,8 @@ const addTask = () => {
     const recentTimeRenderItem = ({ item }) => {
         const isActive = item.id == selectedDayId
         return (
-            <TouchableOpacity onPress={() => setselectedDayId(item.id)} style={[styles.timeRecent, { backgroundColor: isActive ? '#88ced2' : 'transparent' }]} >
-                <Text style={{ fontSize: 17, color: isActive ? 'white' : 'black' }}>{item.recentTime}</Text>
+            <TouchableOpacity onPress={() => setselectedDayId(item.id)} style={[styles.timeRecent, { backgroundColor: isActive ? color.accent : 'transparent', borderColor: color.borderSecondary }]} >
+                <Text style={{ fontSize: 17, color: color.textPrimary }}>{item.recentTime}</Text>
             </TouchableOpacity>
         )
     }
@@ -39,26 +41,27 @@ const addTask = () => {
     }
     return (
 
-        <SafeAreaView style={styles.container}>
-            <SystemBars style='auto' />
+        <SafeAreaView style={[styles.container, { backgroundColor: color.background }]}>
+            <SystemBars style={color.statusBarStyle} />
             <View style={styles.TopText}>
-                <View style={styles.horzontalLine} />
-                <Text style={{ fontSize: 30 }}>Add Task</Text>
-                <View style={styles.horzontalLine} />
+                <View style={[styles.horzontalLine, { backgroundColor: color.linePrimary }]} />
+                <Text style={{ fontSize: 30, color: color.textPrimary }}>Add Task</Text>
+                <View style={[styles.horzontalLine, { backgroundColor: color.linePrimary }]} />
             </View>
-            <View style={styles.inputBox}>
+            <View style={[styles.inputBox]}>
                 <TextInput
                     onChangeText={setInputValue}
                     value={inputValue}
-                    style={styles.input}
+                    placeholderTextColor={color.inputPlaceholder}
+                    style={[styles.input, { backgroundColor: color.inputBackground, borderColor: color.inputBorder, color: color.textPrimary }]}
                     placeholder="add task"
                 />
-                <Ionicons name="add-circle-outline" size={50} color="black" onPress={addTasks} />
+                <Ionicons name="add-circle-outline" size={50} color={color.iconPrimary} onPress={addTasks} />
             </View>
             <View style={[styles.TopText, { marginTop: 40 }]}>
-                <View style={[styles.horzontalLine, { backgroundColor: '#a19292', opacity: 0.6 }]} />
-                <Text style={{ fontSize: 15 }}>Recent Task</Text>
-                <View style={[styles.horzontalLine, { backgroundColor: '#a19292', opacity: 0.6 }]} />
+                <View style={[styles.horzontalLine, { backgroundColor: color.lineSecondary, opacity: 0.6 }]} />
+                <Text style={{ fontSize: 15, color: color.textSecondary }}>Recent Task</Text>
+                <View style={[styles.horzontalLine, { backgroundColor: color.lineSecondary, opacity: 0.6 }]} />
             </View >
             <FlatList
                 data={recentTime}
@@ -72,7 +75,7 @@ const addTask = () => {
                     contentContainerStyle={{ paddingBottom: 50 }}
                 >
                     {selectedDayList.taskList.map((task, index) => (
-                        <TouchableOpacity style={styles.text} key={index} onPress={() => recentTask(task)}>
+                        <TouchableOpacity style={[styles.text, { backgroundColor: color.taskCardBackground, borderColor: color.taskCardBorder }]} key={index} onPress={() => recentTask(task)}>
                             <Text style={{ fontSize: 30, color: 'white' }} >{task}</Text>
                         </TouchableOpacity>
                     ))}
@@ -91,7 +94,6 @@ export default addTask
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     },
     TopText: {
         marginTop: 20,
