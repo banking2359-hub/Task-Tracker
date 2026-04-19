@@ -4,7 +4,8 @@ export const lightThem = {
     backgroundImage: require('../../assets/lightBackground.jpeg'),
     // Background for the task list card/container at the bottom of addTask
     backgroundSecondary: '#F5F5F5',
-
+    tabbarActiveColor: 'rgba(0,0,0,0.8)',
+    tabbarInactiveColor: 'rgba(0,0,0,0.4)',
     // Main text color (Timer, Task Name, "Add Task" header, "Back" text, task items)
     textPrimary: '#000000',
 
@@ -21,14 +22,14 @@ export const lightThem = {
     startButton: '#67d45d',
 
     // Border color for the "Start/Pause" button in FocusTime (originally 'blue')
-    startButtonBorder: 'blue',
+    startButtonBorder: '#67d45d',
 
     // Background color for the time selection circles (6, 15, 25 mins) in FocusTime
     timeBoxBackground: '#b3a6c0',
 
     // Border color for the time selection circles in FocusTime (originally 'white')
     timeBoxBorder: '#CCCCCC',
-
+    timeText: '#000000',
     // Border color for the recent time pills ("today", "yesterday", etc.)
     border: '#e7d4d2',
 
@@ -75,7 +76,8 @@ export const darkThem = {
     backgroundImage: require('../../assets/background.jpeg'),
     // Background for the task list card/container at the bottom of addTask
     backgroundSecondary: '#16213E',
-
+    tabbarActiveColor: 'rgba(255,255,255,0.8)',
+    tabbarInactiveColor: 'rgba(255,255,255,0.5)',
     // Main text color (Timer, Task Name, "Add Task" header, "Back" text, task items)
     textPrimary: '#FFFFFF',
 
@@ -99,7 +101,7 @@ export const darkThem = {
 
     // Border color for the time selection circles in FocusTime
     timeBoxBorder: '#5DADE2',
-
+    timeText: '#FFFFFF',
     // Border color for the recent time pills ("today", "yesterday", etc.)
     border: '#34495E',
 

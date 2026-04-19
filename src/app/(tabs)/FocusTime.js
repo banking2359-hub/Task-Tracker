@@ -86,26 +86,26 @@ export default function FocusTime() {
 
                 <TouchableOpacity style={styles.backBottom} onPress={() => router.back()}>
                     <View style={styles.backBottomContaiqner}>
-                        <Ionicons name="chevron-back" size={35} color={'white'} />
+                        <Ionicons name="chevron-back" size={35} color={"white"} />
                         <Text style={{ fontSize: 30, color: 'white' }}>Back</Text>
                     </View>
                     <MaterialIcons name={isdark ? "light-mode" : "dark-mode"} size={40} color="white" onPress={toggleThem} />
                 </TouchableOpacity>
 
-                <Text style={styles.timer}>{formatTime(coutTime)}</Text>
+                <Text style={[styles.timer]}>{formatTime(coutTime)}</Text>
                 <View style={styles.task}>
                     <Text style={{ fontSize: 27, color: 'white' }}>{selectedDay}</Text>
                 </View>
                 <View style={styles.horzontalBar} />
                 <View style={styles.timesContainer}>
                     {times.map((time) => (
-                        <TouchableOpacity onPress={() => { setResetTime(time), setTime(time); setIsStart(false); setzero(false) }} key={time} style={styles.timeBox}>
-                            <Text style={{ fontSize: 35, padding: 17 }}>{Math.floor(time / (1000 * 60))}</Text>
+                        <TouchableOpacity onPress={() => { setResetTime(time), setTime(time); setIsStart(false); setzero(false) }} key={time} style={[styles.timeBox,{backgroundColor: color.timeBoxBackground, borderColor: color.timeBoxBorder}]}>
+                            <Text style={{ fontSize: 35, padding: 17,color: color.timeText }}>{Math.floor(time / (1000 * 60))}</Text>
                         </TouchableOpacity>
                     ))}
                 </View>
 
-                <TouchableOpacity onPress={() => setIsStart(!isZoro ? !isStart : isStart)} style={[styles.startBox, { borderColor: 'blue', marginVertical: 30 }]}>
+                <TouchableOpacity onPress={() => setIsStart(!isZoro ? !isStart : isStart)} style={[styles.startBox, { borderColor: color.startButtonBorder, backgroundColor: color.startButton, marginVertical: 30 }]}>
                     <Text style={{ fontSize: 30, color: 'white' }}>{startPauseHandler()}</Text>
                 </TouchableOpacity>
                 <Toast />
