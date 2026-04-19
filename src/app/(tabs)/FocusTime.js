@@ -6,8 +6,10 @@ import { Ionicons } from "@expo/vector-icons"
 import { Link, router } from "expo-router"
 import { TaskContext } from "../../context/TaskContext"
 import { SystemBars } from "react-native-edge-to-edge"
+import { useColorContext } from "../../context/colorContext"
 export default function FocusTime() {
     const { selectedDay, setTodayTask, setselectedDayId, todayTask } = useContext(TaskContext)
+    const { color } = useColorContext()
     const times = [6000, 900000, 1500000]
     const [coutTime, setTime] = useState(times[0])
     const [resetTime, setResetTime] = useState(coutTime)
@@ -78,7 +80,7 @@ export default function FocusTime() {
     }
 
     return (
-        <ImageBackground source={require('../../../assets/background.jpeg')} resizeMode='cover' style={{ flex: 1 }} >
+        <ImageBackground source={color.backgroundImage} resizeMode='cover' style={{ flex: 1 }} >
             <SystemBars style={'light'} />
             <SafeAreaView style={{ flex: 1, alignItems: 'center' }}>
 

@@ -70,7 +70,7 @@ const addTask = () => {
                 horizontal={true}
                 style={{ flexGrow: 0, paddingVertical: 20 }}
             />
-            <ImageBackground resizeMode="cover" style={{ flex: 1, margin: 20, padding: 10, borderRadius: 30, overflow: 'hidden' }} source={require('../../../assets/background.jpeg')}>
+            <ImageBackground resizeMode="cover" style={{ flex: 1, margin: 20, marginBottom: 80, padding: 10, borderRadius: 30, overflow: 'hidden' }} source={color.backgroundImage}>
                 <ScrollView
                     contentContainerStyle={{ paddingBottom: 50 }}
                 >

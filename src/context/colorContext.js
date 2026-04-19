@@ -3,7 +3,7 @@ import { darkThem, lightThem } from "../utils/colors";
 const colorContext = createContext()
 
 export default function ColorProvider({ children }) {
-    const [isdark, setIsDark] = useState(true)
+    const [isdark, setIsDark] = useState(false)
     const toggleThem = () => setIsDark(prev => !prev)
 
     const color = isdark ? darkThem : lightThem
