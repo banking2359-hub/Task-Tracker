@@ -7,7 +7,7 @@ export default function ColorProvider({ children }) {
     const toggleThem = () => setIsDark(prev => !prev)
 
     const color = isdark ? darkThem : lightThem
-    const value = { color, toggleThem }
+    const value = { color, toggleThem,isdark }
     return (
         <colorContext.Provider value={value}>
             {children}

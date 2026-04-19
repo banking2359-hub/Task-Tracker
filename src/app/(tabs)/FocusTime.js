@@ -2,14 +2,14 @@ import { useContext, useEffect, useRef, useState } from "react"
 import { Button, View, Text, StyleSheet, TouchableOpacity, ImageBackground, Alert } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Toast from "react-native-toast-message"
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons, MaterialIcons } from "@expo/vector-icons"
 import { Link, router } from "expo-router"
 import { TaskContext } from "../../context/TaskContext"
 import { SystemBars } from "react-native-edge-to-edge"
 import { useColorContext } from "../../context/colorContext"
 export default function FocusTime() {
     const { selectedDay, setTodayTask, setselectedDayId, todayTask } = useContext(TaskContext)
-    const { color } = useColorContext()
+    const { color, isdark, toggleThem } = useColorContext()
     const times = [6000, 900000, 1500000]
     const [coutTime, setTime] = useState(times[0])
     const [resetTime, setResetTime] = useState(coutTime)
@@ -85,8 +85,11 @@ export default function FocusTime() {
             <SafeAreaView style={{ flex: 1, alignItems: 'center' }}>
 
                 <TouchableOpacity style={styles.backBottom} onPress={() => router.back()}>
-                    <Ionicons name="chevron-back" size={30} color={'white'} />
-                    <Text style={{ fontSize: 30, color: 'white' }}>Back</Text>
+                    <View style={styles.backBottomContaiqner}>
+                        <Ionicons name="chevron-back" size={35} color={'white'} />
+                        <Text style={{ fontSize: 30, color: 'white' }}>Back</Text>
+                    </View>
+                    <MaterialIcons name={isdark ? "light-mode" : "dark-mode"} size={40} color="white" onPress={toggleThem} />
                 </TouchableOpacity>
 
                 <Text style={styles.timer}>{formatTime(coutTime)}</Text>
@@ -159,9 +162,13 @@ const styles = StyleSheet.create({
     },
     backBottom: {
         flexDirection: 'row',
-        alignItems: 'center',
-        alignSelf: 'flex-start',
+        alignSelf: 'stretch',
+        justifyContent: 'space-between',
         padding: 30,
-        gap: 3,
+    },
+    backBottomContaiqner: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        columnGap: 5
     }
 })
