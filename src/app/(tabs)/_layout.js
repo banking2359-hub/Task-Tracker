@@ -4,6 +4,7 @@ import TaskProvider from "../../context/TaskContext";
 import Octicons from '@expo/vector-icons/Octicons';
 import { useColorContext } from "../../context/colorContext";
 import { SystemBars } from "react-native-edge-to-edge";
+import OnBoarding from '../../component/onBoarding'
 export default function layout() {
     const TabLayout = () => {
         const { color } = useColorContext();
@@ -51,12 +52,15 @@ export default function layout() {
             </Tabs>
         )
     };
-    return (
-        <ColorProvider>
-            <TaskProvider>
-                <TabLayout />
-            </TaskProvider>
-        </ColorProvider>
-
+    return(
+        <OnBoarding />
     )
+    // // return (
+    // //     <ColorProvider>
+    // //         <TaskProvider>
+    // //             <TabLayout />
+    // //         </TaskProvider>
+    // //     </ColorProvider>
+
+    // )
 }
