@@ -5,7 +5,21 @@ import Octicons from '@expo/vector-icons/Octicons';
 import { useColorContext } from "../../context/colorContext";
 import { SystemBars } from "react-native-edge-to-edge";
 import OnBoarding from '../../component/onBoarding'
+import { getItem, removeItem } from "../../utils/storage";
+import { useEffect, useState } from "react";
 export default function layout() {
+    const [isFirstLaunch, setIsFirstLaunch] = useState(null)
+    const onBoardingStatus = async () => {
+        const status = await getItem('OnboardingCompleted')
+        console.log(status)
+        setIsFirstLaunch(status != 'true')
+    }
+
+    useEffect(() => {
+        removeItem('OnboardingCompleted')
+        onBoardingStatus()
+
+    }, [])
     const TabLayout = () => {
         const { color } = useColorContext();
         return (
@@ -52,15 +66,23 @@ export default function layout() {
             </Tabs>
         )
     };
-    return(
-        <OnBoarding />
-    )
-    // // return (
-    // //     <ColorProvider>
-    // //         <TaskProvider>
-    // //             <TabLayout />
-    // //         </TaskProvider>
-    // //     </ColorProvider>
+    if (isFirstLaunch === null) {
+        return null
+    }
+    if (isFirstLaunch) {
+        return (
+            <OnBoarding completed={onBoardingStatus} />
+        )
+    }
+    else {
+        return (
+            <ColorProvider>
+                <TaskProvider>
+                    <TabLayout />
+                </TaskProvider>
+            </ColorProvider>
 
-    // )
+        )
+    }
+
 }

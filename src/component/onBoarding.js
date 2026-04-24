@@ -1,12 +1,18 @@
 import Onboarding from "react-native-onboarding-swiper";
 import LottieView from "lottie-react-native";
 import { Image } from "react-native";
+import { setItem } from "../utils/storage";
 
-
-export default function OnBoardingScreen() {
-
+export default function OnBoardingScreen({ completed }) {
+    const handleFinish = async () => {
+        await setItem('OnboardingCompleted', 'true')
+        completed()
+    }
     return (
         <Onboarding
+            onDone={handleFinish}
+            onSkip={handleFinish}
+            doneLabel={'Done'}
             pages={[
                 {
                     backgroundColor: "#5e70b5",
@@ -25,7 +31,7 @@ export default function OnBoardingScreen() {
                         autoPlay
                         loop
                         source={require('../../assets/animation/study.json')}
-                        style={{width:450,height:450}}
+                        style={{ width: 450, height: 450 }}
                     />,
                     title: "FOCUS TIME",
                     subtitle: "select a time you plane for your added task and start to achieve  it . "
@@ -35,7 +41,7 @@ export default function OnBoardingScreen() {
                     image: <LottieView
                         autoPlay
                         source={require('../../assets/animation/checkList.json')}
-                        style={{width:500,height:500}}
+                        style={{ width: 500, height: 500 }}
                     />,
                     title: "RECENT TASK",
                     subtitle: "see what task you seccesfully acomplish as your plane"
