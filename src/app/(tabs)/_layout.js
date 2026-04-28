@@ -16,7 +16,6 @@ export default function layout() {
     }
 
     useEffect(() => {
-        removeItem('OnboardingCompleted')
         onBoardingStatus()
 
     }, [])
@@ -25,7 +24,10 @@ export default function layout() {
         return (
             <Tabs screenOptions={
                 {
-                    headerShown: false,
+                    headerLeft: () => <Octicons name="sidebar-collapse" size={24} color="black" />,
+                    headerLeftContainerStyle: {
+                        paddingLeft: 15,
+                    },
                     tabBarStyle: {
                         position: 'absolute',
                         elevation: 0,

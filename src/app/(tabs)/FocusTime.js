@@ -99,8 +99,8 @@ export default function FocusTime() {
                 <View style={styles.horzontalBar} />
                 <View style={styles.timesContainer}>
                     {times.map((time) => (
-                        <TouchableOpacity onPress={() => { setResetTime(time), setTime(time); setIsStart(false); setzero(false) }} key={time} style={[styles.timeBox,{backgroundColor: color.timeBoxBackground, borderColor: color.timeBoxBorder}]}>
-                            <Text style={{ fontSize: 35, padding: 17,color: color.timeText }}>{Math.floor(time / (1000 * 60))}</Text>
+                        <TouchableOpacity onPress={() => { setResetTime(time), setTime(time); setIsStart(false); setzero(false) }} key={time} style={[styles.timeBox, { backgroundColor: color.timeBoxBackground, borderColor: color.timeBoxBorder }]}>
+                            <Text style={{ fontSize: 35, padding: 17, color: color.timeText }}>{Math.floor(time / (1000 * 60))}:00</Text>
                         </TouchableOpacity>
                     ))}
                 </View>
@@ -133,16 +133,18 @@ const styles = StyleSheet.create({
         width: '90%',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         marginBottom: 30,
-        borderColor: 'white'
+        borderColor: 'white',
+        gap: 10
     },
     timeBox: {
-        padding: 15,
+        paddingHorizontal: 7,
         borderWidth: 1,
+        paddingVertical:1,
         borderColor: 'white',
         backgroundColor: '#b3a6c0',
-        borderRadius: 100,
+        borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
         opacity: .8

@@ -43,11 +43,7 @@ const addTask = () => {
 
         <SafeAreaView style={[styles.container, { backgroundColor: color.background }]}>
             <SystemBars style={color.statusBarStyle} />
-            <View style={styles.TopText}>
-                <View style={[styles.horzontalLine, { backgroundColor: color.linePrimary }]} />
-                <Text style={{ fontSize: 30, color: color.textPrimary }}>Add Task</Text>
-                <View style={[styles.horzontalLine, { backgroundColor: color.linePrimary }]} />
-            </View>
+            
             <View style={[styles.inputBox]}>
                 <TextInput
                     onChangeText={setInputValue}
