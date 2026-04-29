@@ -52,7 +52,9 @@ const addTask = () => {
                     style={[styles.input, { backgroundColor: color.inputBackground, borderColor: color.inputBorder, color: color.textPrimary }]}
                     placeholder="add task"
                 />
-                <Ionicons name="add-circle-outline" size={50} color={color.iconPrimary} onPress={addTasks} />
+                <View style={styles.StartFocusContainer}>
+                    <Text>Start Focus</Text>
+                </View>
             </View>
             <View style={[styles.TopText, { marginTop: 40 }]}>
                 <View style={[styles.horzontalLine, { backgroundColor: color.lineSecondary, opacity: 0.6 }]} />
@@ -78,8 +80,6 @@ const addTask = () => {
 
                 </ScrollView>
             </ImageBackground>
-
-
         </SafeAreaView >
     )
 }
@@ -103,6 +103,12 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 2,
         backgroundColor: 'red'
+    },
+    StartFocusContainer: {
+        backgroundColor: 'red',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 10
     },
     inputBox: {
         marginTop: 50,

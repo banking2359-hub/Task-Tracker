@@ -7,7 +7,9 @@ import { SystemBars } from "react-native-edge-to-edge";
 import OnBoarding from '../../component/onBoarding'
 import { getItem, removeItem } from "../../utils/storage";
 import { useEffect, useState } from "react";
-export default function layout() {
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { SafeAreaView } from "react-native-safe-area-context";
+export default function Layout() {
     const [isFirstLaunch, setIsFirstLaunch] = useState(null)
     const onBoardingStatus = async () => {
         const status = await getItem('OnboardingCompleted')
@@ -28,6 +30,7 @@ export default function layout() {
                     headerLeftContainerStyle: {
                         paddingLeft: 15,
                     },
+                    
                     tabBarStyle: {
                         position: 'absolute',
                         elevation: 0,
@@ -65,7 +68,16 @@ export default function layout() {
                         }
                     }}
                 />
+                <Tabs.Screen name="setting"
+                    options={{
+                        title: 'Setting',
+                        tabBarIcon: ({ color, size }) => {
+                            return <Ionicons name="settings-outline" size={size + 4} color={color} />
+                        }
+                    }}
+                />
             </Tabs>
+
         )
     };
     if (isFirstLaunch === null) {
@@ -78,12 +90,13 @@ export default function layout() {
     }
     else {
         return (
-            <ColorProvider>
-                <TaskProvider>
-                    <TabLayout />
-                </TaskProvider>
-            </ColorProvider>
-
+            <SafeAreaView edges={['bottom']} style={{ flex: 1, }}>
+                <ColorProvider>
+                    <TaskProvider>
+                        <TabLayout />
+                    </TaskProvider>
+                </ColorProvider>
+            </SafeAreaView>
         )
     }
 
