@@ -43,7 +43,10 @@ const addTask = () => {
 
         <SafeAreaView style={[styles.container, { backgroundColor: color.background }]}>
             <SystemBars style={color.statusBarStyle} />
-            
+            <View style={{ marginTop: 30, paddingLeft: 35 }}>
+                <Text style={{ fontSize: 30, color: 'black', fontWeight: 'bold' }}>Focus</Text>
+                <Text style={{ color: 'black', opacity: 0.7 }}>what do you want to work on ?</Text>
+            </View>
             <View style={[styles.inputBox]}>
                 <TextInput
                     onChangeText={setInputValue}
@@ -51,35 +54,20 @@ const addTask = () => {
                     placeholderTextColor={color.inputPlaceholder}
                     style={[styles.input, { backgroundColor: color.inputBackground, borderColor: color.inputBorder, color: color.textPrimary }]}
                     placeholder="add task"
+                    borderWidth={0}
                 />
-                <View style={styles.StartFocusContainer}>
-                    <Text>Start Focus</Text>
-                </View>
+                <TouchableOpacity style={styles.StartFocusContainer} onPress={addTasks}>
+                    <Text style={{ fontSize: 20, color: 'white' }}>Start Focus</Text>
+                </TouchableOpacity>
             </View>
-            <View style={[styles.TopText, { marginTop: 40 }]}>
-                <View style={[styles.horzontalLine, { backgroundColor: color.lineSecondary, opacity: 0.6 }]} />
-                <Text style={{ fontSize: 15, color: color.textSecondary }}>Recent Task</Text>
-                <View style={[styles.horzontalLine, { backgroundColor: color.lineSecondary, opacity: 0.6 }]} />
-            </View >
-            <FlatList
-                data={recentTime}
-                keyExtractor={(item) => item.id}
-                renderItem={recentTimeRenderItem}
-                horizontal={true}
-                style={{ flexGrow: 0, paddingVertical: 20 }}
-            />
-            <ImageBackground resizeMode="cover" style={{ flex: 1, margin: 20, marginBottom: 80, padding: 10, borderRadius: 30, overflow: 'hidden' }} source={color.backgroundImage}>
-                <ScrollView
-                    contentContainerStyle={{ paddingBottom: 50 }}
-                >
-                    {selectedDayList.taskList.map((task, index) => (
-                        <TouchableOpacity style={[styles.text, { backgroundColor: color.taskCardBackground, borderColor: color.taskCardBorder }]} key={index} onPress={() => recentTask(task)}>
-                            <Text style={{ fontSize: 30, color: 'white' }} >{task}</Text>
-                        </TouchableOpacity>
-                    ))}
-
-                </ScrollView>
-            </ImageBackground>
+            <Text style={{ fontSize: 20, color: 'black', marginTop: 20, paddingHorizontal: 40, fontWeight: 'bold' }}>Previous tasks</Text>
+            <ScrollView contentContainerStyle={{ paddingBottom: 50 }}>
+                {selectedDayList.taskList.map((task, index) => (
+                    <TouchableOpacity style={[styles.text, { backgroundColor: color.taskCardBackground, borderColor: color.taskCardBorder }]} key={index} onPress={() => recentTask(task)}>
+                        <Text style={{ fontSize: 30, color: 'black' }} >{task}</Text>
+                    </TouchableOpacity>
+                ))}
+            </ScrollView>
         </SafeAreaView >
     )
 }
@@ -105,21 +93,23 @@ const styles = StyleSheet.create({
         backgroundColor: 'red'
     },
     StartFocusContainer: {
-        backgroundColor: 'red',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 10
+        alignItems: 'center',
+        backgroundColor: '#67d45d',
+        paddingVertical: 15,
+        borderRadius: 10,
     },
     inputBox: {
         marginTop: 50,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
         gap: 20,
-        paddingHorizontal: 40
+        paddingHorizontal: 40,
+        backgroundColor: '#ebeaec',
+        marginHorizontal: 30,
+        borderRadius: 30,
+        paddingVertical: 30
     },
     input: {
-        flex: 1,
+        paddingHorizontal: 20,
+        height: 65,
         borderWidth: 1,
         borderRadius: 6
     },
