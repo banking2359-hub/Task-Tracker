@@ -83,7 +83,6 @@ export default function FocusTime() {
 
 
         <SafeAreaView style={{ flex: 1, alignItems: 'center' }}>
-            <SystemBars style={'light'} />
             <TouchableOpacity style={styles.backBottom} onPress={() => router.back()}>
                 <View style={styles.backBottomContaiqner}>
                     <Ionicons name="chevron-back" size={35} color={"white"} />

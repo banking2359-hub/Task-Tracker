@@ -42,7 +42,6 @@ const addTask = () => {
     return (
 
         <SafeAreaView style={[styles.container, { backgroundColor: color.background }]}>
-            <SystemBars style={color.statusBarStyle} />
             <View style={{ marginTop: 30, paddingLeft: 35 }}>
                 <Text style={{ fontSize: 30, color: 'black', fontWeight: 'bold' }}>Focus</Text>
                 <Text style={{ color: 'black', opacity: 0.7 }}>what do you want to work on ?</Text>

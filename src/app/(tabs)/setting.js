@@ -2,7 +2,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { SystemBars } from "react-native-edge-to-edge";
+import { useColorContext } from "../../context/colorContext";
 export default function Setting() {
+    const { color } = useColorContext()
     return (
         <View style={{ flex: 1 }}>
             <View style={styles.mainContainer}>

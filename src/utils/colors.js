@@ -1,4 +1,5 @@
 export const lightThem = {
+    tabbarbackground: '#f8f6f6',
     // Main screen background (SafeAreaView in addTask, main View in FocusTime)
     background: '#FFFFFF',
     backgroundImage: require('../../assets/lightBackground.jpeg'),
@@ -71,6 +72,7 @@ export const lightThem = {
 };
 
 export const darkThem = {
+    tabbarbackground: '#212132',
     // Main screen background (SafeAreaView in addTask, main View in FocusTime)
     background: '#1A1A2E',
     backgroundImage: require('../../assets/background.jpeg'),
